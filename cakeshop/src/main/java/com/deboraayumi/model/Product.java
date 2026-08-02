@@ -1,4 +1,4 @@
-package model;
+package com.deboraayumi.model;
 
 public class Product {
 
