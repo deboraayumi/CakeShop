@@ -11,6 +11,8 @@ public class Product {
         private int stock;
         private double salePercent;
 
+        public Product(){}
+
 
         public Product(String name, double price, int stock) {
                 stockZeroChecker(stock);
