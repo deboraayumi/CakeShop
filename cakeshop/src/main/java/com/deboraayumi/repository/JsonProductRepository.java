@@ -38,7 +38,7 @@ public class JsonProductRepository{
 
         for (Product product : products) {
 
-            if (product == p) {
+            if (product.getName() == p.getName()) {
                 product = p;
 
                 try {
