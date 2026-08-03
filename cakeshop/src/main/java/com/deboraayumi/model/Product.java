@@ -11,6 +11,8 @@ public class Product {
         private int stock;
         private double salePercent;
 
+        public Product(){}
+
 
         public Product(String name, double price, int stock) {
                 stockZeroChecker(stock);
@@ -23,22 +25,22 @@ public class Product {
                 this.salePercent = 0;
         }
 
-        int getId(){
+        public int getId(){
             return this.id;
         }
 
     /*-------------------------Name-------------------------*/
 
-        String getName(){
+        public String getName(){
             return this.name;
         }
 
-        void setName(String name) {
+        public void setName(String name) {
             nameEmptyChecker(name);
             this.name = name;
         }
             //throws erro vai só pra quem tem o throw new ou pra tds?
-        void nameEmptyChecker(String name) throws IllegalArgumentException {
+        private void nameEmptyChecker(String name) throws IllegalArgumentException {
             if(name.isEmpty()){
                 throw new IllegalArgumentException( "Product name must have at least one word");
             }
@@ -46,16 +48,16 @@ public class Product {
 
     /*-------------------------Price-------------------------*/
 
-        double getPrice(){
+        public double getPrice(){
             return this.price;
         }
 
-        void setPrice(double price) {
+        public void setPrice(double price) {
             priceZeroChecker(price);
             this.price = price;
         }
 
-        void priceZeroChecker(double price) throws IllegalArgumentException {
+        private void priceZeroChecker(double price) throws IllegalArgumentException {
             if(price <=0.0){
                 throw new IllegalArgumentException( "Invalid Price. Insert a value bigger than zero");
             }
@@ -64,18 +66,18 @@ public class Product {
 
     /*-------------------------Sale-------------------------*/
 
-        double getSalePrice(){
+        public double getSalePrice(){
             return this.price * (1 - (this.salePercent / 100));
             
         }
 
 
 
-        double getSalePercent(){
+        public double getSalePercent(){
             return this.salePercent;
         }
 
-        void setSalePercent(double salePercent){
+        public void setSalePercent(double salePercent){
             this.salePercent = salePercent;
         }
 
@@ -83,24 +85,24 @@ public class Product {
 
     /*-------------------------Stock-------------------------*/
 
-        int getStock(){
+        public int getStock(){
             return this.stock;
         }
 
-        void setStock(int stock){
+        public void setStock(int stock){
             this.stock = stock;
         }
 
-        void addStock(int stock){
+        public void addStock(int stock){
             this.stock += stock;
         }
 
-        void subtractStock(int stock) {
+        public void subtractStock(int stock) {
             stockZeroChecker(stock);
             this.stock -= stock;
         }    
 
-        void stockZeroChecker(int stock) throws IllegalArgumentException {
+        private void stockZeroChecker(int stock) throws IllegalArgumentException {
             if(stock <0){
                 throw new IllegalArgumentException("Invalid Stock. Insert a value bigger than zero");
             }
@@ -109,7 +111,7 @@ public class Product {
 
     /*-------------------------Test Print-------------------------*/
 
-        void printData(){
+        public void printData(){
             System.out.printf("Product Name: %s", this.name);
             System.out.printf("Product Price: %f", this.price);
             System.out.printf("Product Stock: %d", this.stock);
