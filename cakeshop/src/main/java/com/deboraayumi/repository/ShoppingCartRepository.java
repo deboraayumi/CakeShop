@@ -9,11 +9,11 @@ import com.deboraayumi.model.ShoppingCart;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JsonShoppingCartRepository {
+public class ShoppingCartRepository {
 
     private ShoppingCart currentCart;
 
-    public JsonShoppingCartRepository(ShoppingCart s){
+    public ShoppingCartRepository(ShoppingCart s){
         this.currentCart = s;
     }
 

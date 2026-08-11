@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
-public class JsonProductRepository{
+public class ProductRepository{
 
     private static final String FILE_PATH = "CakeShop\\data\\productDB.json";
     private final ObjectMapper mapper = new ObjectMapper();
