@@ -34,23 +34,14 @@ public class JsonProductRepository{
     }
 
 
-    //update
-    public void updateProducts(Product p){
-        var products = getAllProducts();
-
-        for (Product product : products) {
-
-            if (product.getName() == p.getName()) {
-                product = p;
-
+    public void saveProducts(List<Product> p){
                 try {
-                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, products);
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, p);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-        }
-
-
-    }
+    }    
+    
 }
+
+

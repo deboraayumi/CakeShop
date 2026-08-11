@@ -33,7 +33,7 @@ public class JsonShoppingCartRepository {
 
 
     //read all
-    public List<ShoppingCart> getAllSelectedProducts(){
+    public List<ShoppingCart> listCartItems(){
 
         if(!file.exists()){
             return new ArrayList<>();
@@ -48,11 +48,9 @@ public class JsonShoppingCartRepository {
 
     
     //update
-    public void updateShoppingCart(ShoppingCart sc){
-        var cart = getAllSelectedProducts();
-
+    public void saveCart(List<ShoppingCart> sc){
         try{
-            mapper.writerWithDefaultPrettyPrinter().writeValue(file, cart);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(file, sc);
         } catch (IOException e){
             e.printStackTrace();
         }

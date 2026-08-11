@@ -9,7 +9,6 @@ public class Product {
         private String name;
         private double price;
         private int stock;
-        private double salePercent;
 
         public Product(){}
 
@@ -22,7 +21,6 @@ public class Product {
                 this.name = name;
                 this.price = price;
                 this.stock = stock;
-                this.salePercent = 0;
         }
 
         public int getId(){
@@ -64,24 +62,6 @@ public class Product {
         }
 
 
-    /*-------------------------Sale-------------------------*/
-
-        public double getSalePrice(){
-            return this.price * (1 - (this.salePercent / 100));
-            
-        }
-
-
-
-        public double getSalePercent(){
-            return this.salePercent;
-        }
-
-        public void setSalePercent(double salePercent){
-            this.salePercent = salePercent;
-        }
-
-
 
     /*-------------------------Stock-------------------------*/
 
@@ -115,6 +95,5 @@ public class Product {
             System.out.printf("Product Name: %s", this.name);
             System.out.printf("Product Price: %f", this.price);
             System.out.printf("Product Stock: %d", this.stock);
-            System.out.printf("Product Sale percent: %f", this.salePercent);
         }
     }
