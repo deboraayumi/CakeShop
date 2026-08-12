@@ -48,9 +48,9 @@ public class ShoppingCartRepository {
 
     
     //update
-    public void saveCart(List<ShoppingCart> sc){
+    public void saveCart(ShoppingCart sc){
         try{
-            mapper.writerWithDefaultPrettyPrinter().writeValue(file, sc);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(file, sc.getAllProducts());
         } catch (IOException e){
             e.printStackTrace();
         }

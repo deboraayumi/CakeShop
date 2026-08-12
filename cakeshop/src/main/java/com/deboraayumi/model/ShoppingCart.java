@@ -11,6 +11,14 @@ public class ShoppingCart {
         this.products = new ArrayList<Product>();
     }
 
+    public List<Product> getAllProducts(){
+        return this.products;
+    }
+
+    public void addProduct(Product p){
+        this.products.add(p);
+    }
+
 
     public double calcTotalValue(){
         double totalValue = 0;
