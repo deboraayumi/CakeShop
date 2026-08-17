@@ -3,6 +3,7 @@ package com.deboraayumi.service;
 import java.util.List;
 
 import com.deboraayumi.exception.InvalidProductIdException;
+import com.deboraayumi.model.CartItem;
 import com.deboraayumi.model.Product;
 import com.deboraayumi.model.ShoppingCart;
 import com.deboraayumi.repository.ProductRepository;
@@ -22,21 +23,21 @@ public class ShoppingCartService {
     }
 
 
-    public void addItem(Product p){
+    public void addItem(CartItem c){
 
-        cart.addProduct(p);
+        cart.addCartItem(c);
         save();
     }
 
 
-    public void selectProduct(){
-
-        int selectedID = 0; //test value. recieve here the UI input
+    public void selectProduct(int selectedID, int quantity){
 
         for(Product p : products){
             if(selectedID == p.getId()){
-                cart.addProduct(p);
-                save();
+
+                CartItem c = new CartItem(p, quantity);
+
+                addItem(c);
                 return;
             }
         }   
@@ -44,6 +45,7 @@ public class ShoppingCartService {
         throw new InvalidProductIdException("Invalid product ID.");
 
     }
+
 
     
 

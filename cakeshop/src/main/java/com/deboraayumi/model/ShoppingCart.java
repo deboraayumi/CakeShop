@@ -5,26 +5,26 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private List<Product> products;
+    private List<CartItem> items;
 
     public ShoppingCart(){
-        this.products = new ArrayList<Product>();
+        this.items = new ArrayList<CartItem>();
     }
 
-    public List<Product> getAllProducts(){
-        return this.products;
+    public List<CartItem> getAllItems(){
+        return new ArrayList<>(this.items);
     }
 
-    public void addProduct(Product p){
-        this.products.add(p);
+    public void addCartItem(CartItem c){
+        this.items.add(c);
     }
 
 
     public double calcTotalValue(){
         double totalValue = 0;
 
-        for(Product p : this.products){
-            totalValue += p.getPrice();
+        for(CartItem c : this.items){
+            totalValue += c.getItem().getPrice() * c.getQuantity();
         }
 
         return totalValue;
@@ -32,7 +32,12 @@ public class ShoppingCart {
 
 
     public int calcTotalQuantity(){
-        return this.products.size();
+        int totalQuantity = 0;
+        
+        for(CartItem c : this.items){
+            totalQuantity += c.getQuantity();
+        }
+        return totalQuantity;
     }
 
     
