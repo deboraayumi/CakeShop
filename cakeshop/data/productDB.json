@@ -1,0 +1,61 @@
+[ {
+  "id" : 1,
+  "name" : "Strawberry Short Cake",
+  "price" : 18.0,
+  "stock" : 30,
+  "tags" : [ "STRAWBERRY", "CAKE", "FRUIT" ]
+}, {
+  "id" : 2,
+  "name" : "Dark Chocolate Cocoa Cookie",
+  "price" : 8.5,
+  "stock" : 25,
+  "tags" : [ "CHOCOLATE", "COOKIE", "BITTER" ]
+}, {
+  "id" : 3,
+  "name" : "Apple Pie",
+  "price" : 14.9,
+  "stock" : 12,
+  "tags" : [ "PIE", "FRUIT" ]
+}, {
+  "id" : 4,
+  "name" : "Vanilla Cake",
+  "price" : 22.0,
+  "stock" : 8,
+  "tags" : [ "VANNILA", "CAKE" ]
+}, {
+  "id" : 5,
+  "name" : "Vegan Chocolate Brownie",
+  "price" : 9.9,
+  "stock" : 15,
+  "tags" : [ "CHOCOLATE", "VEGAN" ]
+}, {
+  "id" : 6,
+  "name" : "Gluten-Free Oat Cookie",
+  "price" : 7.5,
+  "stock" : 20,
+  "tags" : [ "COOKIE", "GLUTEN_FREE" ]
+}, {
+  "id" : 7,
+  "name" : "Lactose-Free Chocolate Mousse",
+  "price" : 11.0,
+  "stock" : 10,
+  "tags" : [ "CHOCOLATE", "LACTOSE_FREE" ]
+}, {
+  "id" : 8,
+  "name" : "Banana Pie",
+  "price" : 13.5,
+  "stock" : 12,
+  "tags" : [ "PIE", "FRUIT" ]
+}, {
+  "id" : 9,
+  "name" : "Espresso Coffee",
+  "price" : 6.0,
+  "stock" : 40,
+  "tags" : [ "DRINK", "BITTER" ]
+}, {
+  "id" : 10,
+  "name" : "Strawberry Juice",
+  "price" : 8.0,
+  "stock" : 18,
+  "tags" : [ "DRINK", "FRUIT", "STRAWBERRY" ]
+} ]
