@@ -13,9 +13,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ProductRepository{
 
-    private static final String FILE_PATH = "CakeShop\\data\\productDB.json";
+    private static final String FILE_PATH = "data/productDB.json";
     private final ObjectMapper mapper = new ObjectMapper();
     private final File file = new File(FILE_PATH);
+    
     
 
 
@@ -35,12 +36,17 @@ public class ProductRepository{
 
 
     public void saveProducts(List<Product> p){
-                try {
-                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, p);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-    }    
+        try {
+            File folder = file.getParentFile();
+            if (folder != null && !folder.exists()) {
+                folder.mkdirs();
+            }
+
+            mapper.writerWithDefaultPrettyPrinter().writeValue(file, p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
 
