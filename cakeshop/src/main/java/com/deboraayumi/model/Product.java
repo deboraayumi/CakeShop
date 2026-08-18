@@ -1,19 +1,27 @@
 package com.deboraayumi.model;
 
+import java.util.List;
+
+import com.deboraayumi.exception.InvalidProductArgumentException;
+
 public class Product {
 
 
-        static int idCounter;
+        static int idCounter = 1;
 
         private int id;
         private String name;
         private double price;
         private int stock;
+        private List<Tag> tags;
+        
 
-        public Product(){}
+        public enum Tag{
+            CHOCOLATE, VANNILA, STRAWBERRY, CAKE, COOKIE, PIE, DRINK, BITTER, FRUIT, VEGAN, GLUTEN_FREE, LACTOSE_FREE
+        }
 
 
-        public Product(String name, double price, int stock) {
+        public Product(String name, double price, int stock, List<Tag> tag) {
                 stockZeroChecker(stock);
                 priceZeroChecker(price);
                 nameEmptyChecker(name);
@@ -21,10 +29,15 @@ public class Product {
                 this.name = name;
                 this.price = price;
                 this.stock = stock;
+                this.tags = tag;
         }
 
         public int getId(){
             return this.id;
+        }
+
+        public List<Tag> getTags() {
+            return tags;
         }
 
     /*-------------------------Name-------------------------*/
@@ -37,10 +50,10 @@ public class Product {
             nameEmptyChecker(name);
             this.name = name;
         }
-            //throws erro vai só pra quem tem o throw new ou pra tds?
-        private void nameEmptyChecker(String name) throws IllegalArgumentException {
+        
+        private void nameEmptyChecker(String name){
             if(name.isEmpty()){
-                throw new IllegalArgumentException( "Product name must have at least one word");
+                throw new InvalidProductArgumentException( "Product name must have at least one word");
             }
         }
 
@@ -55,9 +68,9 @@ public class Product {
             this.price = price;
         }
 
-        private void priceZeroChecker(double price) throws IllegalArgumentException {
+        private void priceZeroChecker(double price){
             if(price <=0.0){
-                throw new IllegalArgumentException( "Invalid Price. Insert a value bigger than zero");
+                throw new InvalidProductArgumentException( "Invalid Price. Insert a value bigger than zero");
             }
         }
 
@@ -82,9 +95,9 @@ public class Product {
             this.stock -= stock;
         }    
 
-        private void stockZeroChecker(int stock) throws IllegalArgumentException {
+        private void stockZeroChecker(int stock){
             if(stock <0){
-                throw new IllegalArgumentException("Invalid Stock. Insert a value bigger than zero");
+                throw new InvalidProductArgumentException("Invalid Stock. Insert a value bigger than zero");
             }
         }
 
