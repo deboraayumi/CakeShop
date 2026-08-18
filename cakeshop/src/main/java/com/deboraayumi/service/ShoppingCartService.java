@@ -11,9 +11,9 @@ import com.deboraayumi.repository.ShoppingCartRepository;
 
 public class ShoppingCartService {
 
-    ProductRepository productRepository;
+    ProductRepository productRepository = new ProductRepository();
     ShoppingCart cart = new ShoppingCart();
-    ShoppingCartRepository cartRepository;
+    ShoppingCartRepository cartRepository = new ShoppingCartRepository(cart);
 
     private List<Product> products = productRepository.getAllProducts();
 
