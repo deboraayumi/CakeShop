@@ -105,7 +105,6 @@ mvn exec:java -Dexec.mainClass="com.deboraayumi.Main"
 - [x] Exceções customizadas (`InvalidProductIdException`, `InvalidProductArgumentException`)
 - [x] `ShoppingCartService` (adicionar item por ID + quantidade, salvar carrinho)
 - [x] Seeder com catálogo inicial de produtos
-- [ ] Corrigir path de `ShoppingCartRepository` (ainda contém prefixo `CakeShop/` incorreto)
 - [ ] Implementar `ProductService` (listagem e busca por tag) — arquivo ainda vazio
 - [ ] Construir a interface CLI/menu (listar, buscar, carrinho, checkout)
 - [ ] Tela de pagamento simulado
@@ -114,4 +113,4 @@ mvn exec:java -Dexec.mainClass="com.deboraayumi.Main"
 
 ## Autora
 
-[deboraayumi](https://github.com/deboraayumi) — Estudante de Sistemas de Informação
+[Debora Aguiar](https://github.com/deboraayumi) — Estudante de Sistemas de Informação
