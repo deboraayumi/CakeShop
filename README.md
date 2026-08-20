@@ -49,6 +49,7 @@ cakeshop/
 └── src/main/java/com/deboraayumi/
     ├── Main.java
     ├── exception/
+    |   ├── InvalidTagException.java
     │   ├── InvalidProductIdException.java
     │   └── InvalidProductArgumentException.java
     ├── model/
@@ -59,8 +60,10 @@ cakeshop/
     │   ├── ProductRepository.java
     │   └── ShoppingCartRepository.java
     └── service/
-        ├── ProductService.java
-        └── ShoppingCartService.java
+    |   ├── ProductService.java
+    |   └── ShoppingCartService.java
+    └── utils/
+        └── ProductSeeder.java      #para popular o banco
 ```
 
 ## Modelo de Dados
