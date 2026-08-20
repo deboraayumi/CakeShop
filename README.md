@@ -105,7 +105,7 @@ mvn exec:java -Dexec.mainClass="com.deboraayumi.Main"
 - [x] Exceções customizadas (`InvalidProductIdException`, `InvalidProductArgumentException`)
 - [x] `ShoppingCartService` (adicionar item por ID + quantidade, salvar carrinho)
 - [x] Seeder com catálogo inicial de produtos
-- [ ] Implementar `ProductService` (listagem e busca por tag) — arquivo ainda vazio
+- [X] Implementar `ProductService` (listagem e busca por tag) — arquivo ainda vazio
 - [ ] Construir a interface CLI/menu (listar, buscar, carrinho, checkout)
 - [ ] Tela de pagamento simulado
 - [ ] Redução de estoque após a compra
