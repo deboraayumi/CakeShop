@@ -11,10 +11,9 @@ import com.deboraayumi.repository.ShoppingCartRepository;
 
 public class ShoppingCartService {
 
-    //fix: object incapslation
     private ProductRepository productRepository = new ProductRepository();
     private ShoppingCart cart = new ShoppingCart();
-    private ShoppingCartRepository cartRepository = new ShoppingCartRepository(cart);
+    private ShoppingCartRepository cartRepository = new ShoppingCartRepository();
 
     private List<Product> products = productRepository.getAllProducts();
 

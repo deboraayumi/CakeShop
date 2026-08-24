@@ -37,6 +37,7 @@ public class ProductService {
             for(Product.Tag tag : tags){
                 if(p.getTags().contains(tag)){
                     results.add(p);
+                    break;
                 }
             }
         }
