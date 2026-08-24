@@ -16,8 +16,18 @@ public class Product {
         private List<Tag> tags;
         
 
-        public enum Tag{
-            CHOCOLATE, VANNILA, STRAWBERRY, CAKE, COOKIE, PIE, DRINK, BITTER, FRUIT, VEGAN, GLUTEN_FREE, LACTOSE_FREE
+        public enum Tag {
+            CHOCOLATE,
+            VANNILA,
+            STRAWBERRY,
+            CAKE, COOKIE,
+            PIE,
+            DRINK,
+            BITTER,
+            FRUIT,
+            VEGAN,
+            GLUTEN_FREE,
+            LACTOSE_FREE
         }
 
 
