@@ -2,6 +2,7 @@ package com.deboraayumi.service;
 
 import java.util.List;
 
+import com.deboraayumi.exception.InvalidItemQuantityException;
 import com.deboraayumi.exception.InvalidProductIdException;
 import com.deboraayumi.model.CartItem;
 import com.deboraayumi.model.Product;
@@ -34,6 +35,10 @@ public class ShoppingCartService {
 
         for(Product p : products){
             if(selectedID == p.getId()){
+
+                if(quantity > p.getStock() || quantity <= 0){
+                    throw new InvalidItemQuantityException("The quantity can not exceed maximum or fall below the minimum stock quantity");
+                }
 
                 CartItem c = new CartItem(p, quantity);
 
