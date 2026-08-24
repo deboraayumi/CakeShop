@@ -11,22 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ShoppingCartRepository {
-
-    private ShoppingCart currentCart;
-
-    public ShoppingCartRepository(ShoppingCart s){
-        this.currentCart = s;
-    }
-
-    public void setCurrentCart(ShoppingCart currentCart) {
-        this.currentCart = currentCart;
-    }
-
-    public ShoppingCart getCurrentCart() {
-        return currentCart;
-    }
-
-
+    
     private static final String FILE_PATH = "data/shoppingCartBD.json";
     private final ObjectMapper mapper = new ObjectMapper();
     private final File file = new File(FILE_PATH);
