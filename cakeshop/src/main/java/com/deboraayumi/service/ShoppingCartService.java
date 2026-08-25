@@ -51,8 +51,10 @@ public class ShoppingCartService {
 
     }
 
+    public void resetCart(){
+        cartRepository.clean();
 
-    
+    }
 
     
 }
