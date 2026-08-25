@@ -111,7 +111,7 @@ mvn exec:java -Dexec.mainClass="com.deboraayumi.Main"
 - [X] Implementar `ProductService` (listagem e busca por tag) — arquivo ainda vazio
 - [ ] Construir a interface CLI/menu (listar, buscar, carrinho, checkout)
 - [ ] Tela de pagamento simulado
-- [ ] Redução de estoque após a compra
+- [X] Redução de estoque após a compra
 - [ ] Conectar `Main.java` ao fluxo da aplicação
 
 ## Autora
