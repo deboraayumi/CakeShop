@@ -30,6 +30,8 @@ public class Product {
             LACTOSE_FREE
         }
 
+        public Product(){}
+
 
         public Product(String name, double price, int stock, List<Tag> tag) {
                 stockZeroChecker(stock);

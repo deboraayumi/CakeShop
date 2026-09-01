@@ -5,6 +5,8 @@ public class CartItem {
     private Product item;
     private int quantity;
 
+    public CartItem(){}
+
     public CartItem(Product p, int quantity){
         this.item = p;
         this.quantity = quantity;
