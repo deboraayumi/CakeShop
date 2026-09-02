@@ -20,7 +20,9 @@ public class ProductService {
         return this.products;
     }
 
-    public List<Product> searchByTag(String[] keyword){
+    public List<Product> searchByTag(String keywords){
+
+        List<String> keyword = List.of(keywords.split(" "));
 
         List<Product.Tag> tags = new ArrayList<>();
 
@@ -30,7 +32,7 @@ public class ProductService {
                 tags.add(tag);
 
                 } catch (InvalidTagException e){
-                throw new InvalidTagException("This tag don't exist");
+                throw new InvalidTagException("The tag " + word + " don't exist.");
             }
         }
 
