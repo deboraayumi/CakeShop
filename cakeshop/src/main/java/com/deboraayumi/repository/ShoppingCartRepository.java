@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ShoppingCartRepository {
     
-    private static final String FILE_PATH = "data/shoppingCartBD.json";
+    private static final String FILE_PATH = "data/shoppingCartDB.json";
     private final ObjectMapper mapper = new ObjectMapper();
     private final File file = new File(FILE_PATH);
 
