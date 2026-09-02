@@ -1,19 +1,10 @@
 package com.deboraayumi.ui;
 
-import java.util.List;
 import java.util.Scanner;
-
-import com.deboraayumi.model.Product;
-import com.deboraayumi.repository.ProductRepository;
 
 public class MenuUI {
 
     Scanner scanner = new Scanner(System.in);
-
-    ProductRepository productRepository = new ProductRepository();
-    
-    List<Product> products = productRepository.getAllProducts();
-
 
     public void printLogo(){
         System.out.printf("%60s \n", "=".repeat(70));
@@ -27,6 +18,15 @@ public class MenuUI {
         System.out.printf("%60s \n", "=".repeat(70));
     }
 
+
+    public void welcomePage(){
+
+        printLogo();
+        System.out.printf("%s \n \n", "Welcome!");
+
+
+    }
+
     public void printMenu(){
 
         System.out.println("-".repeat(35));
@@ -36,15 +36,6 @@ public class MenuUI {
         System.out.println("4 - Checkout");
         System.out.println("5 - Exit");
         System.out.println("-".repeat(35));
-
-    }
-
-
-    public void welcomePage(){
-
-        printLogo();
-        System.out.printf("%s \n \n", "Welcome!");
-
 
     }
 
