@@ -2,6 +2,8 @@ package com.deboraayumi.ui;
 
 import java.util.Scanner;
 
+import com.Utils.ConsoleUtils;
+
 public class MenuUI {
 
     Scanner scanner = new Scanner(System.in);
@@ -28,6 +30,7 @@ public class MenuUI {
     }
 
     public void printMenu(){
+        ConsoleUtils.clearScreen();
 
         System.out.println("-".repeat(35));
         System.out.println("1 - Products List");
@@ -84,7 +87,6 @@ public class MenuUI {
 
         }
     }
-
 
     
 
