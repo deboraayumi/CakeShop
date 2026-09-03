@@ -51,6 +51,14 @@ public class ShoppingCartService {
 
     }
 
+    public List<CartItem> getCartItems(){
+        return cartRepository.listCartItems();
+    }
+
+    public double getTotalValue(){
+        return cart.calcTotalValue();
+    }
+
     public void resetCart(){
         cartRepository.clean();
 
