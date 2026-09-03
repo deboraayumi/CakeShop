@@ -24,7 +24,7 @@ public class ShoppingCart {
         double totalValue = 0;
 
         for(CartItem c : this.items){
-            totalValue += c.getItem().getPrice() * c.getQuantity();
+            totalValue += c.getSubTotal();
         }
 
         return totalValue;
