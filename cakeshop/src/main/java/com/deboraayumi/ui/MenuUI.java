@@ -2,11 +2,11 @@ package com.deboraayumi.ui;
 
 import java.util.Scanner;
 
-import com.Utils.ConsoleUtils;
 
 public class MenuUI {
 
     Scanner scanner = new Scanner(System.in);
+    ProductsListUI productsListUI = new ProductsListUI();
 
     public void printLogo(){
         System.out.printf("%60s \n", "=".repeat(70));
@@ -30,20 +30,21 @@ public class MenuUI {
     }
 
     public void printMenu(){
-        ConsoleUtils.clearScreen();
 
         System.out.println("-".repeat(35));
         System.out.println("1 - Products List");
         System.out.println("2 - Search for the Product");
         System.out.println("3 - Shopping Cart");
         System.out.println("4 - Checkout");
-        System.out.println("5 - Exit");
+        System.out.println("0 - Exit");
         System.out.println("-".repeat(35));
 
     }
 
     public void selectPage(){
         while(true){
+
+            printMenu();
 
             System.out.print("Choose a page to go: ");
 
@@ -53,7 +54,7 @@ public class MenuUI {
                 
                 switch (pageSelection){
                     case 1:
-                        System.out.println("product list");
+                        productsListUI.productsListPage();
                         break;
                     
                     case 2:
@@ -68,7 +69,7 @@ public class MenuUI {
                         System.out.println("check");
                         break;
                     
-                    case 5:
+                    case 0:
                         System.exit(0);
                         break;
 
