@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList; 
 import java.util.List;
 
+import com.deboraayumi.exception.ProductLoadException;
 import com.deboraayumi.model.Product;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,8 +30,7 @@ public class ProductRepository{
         try {
             return mapper.readValue(file, new TypeReference<List<Product>>() {});
         } catch (IOException e){
-            e.printStackTrace();
-            return new ArrayList<>();
+            throw new ProductLoadException("Failed to load the data.");
         }
     }
 

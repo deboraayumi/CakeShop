@@ -13,11 +13,10 @@ public class ProductService {
     
     private ProductRepository productRepository = new ProductRepository();
     private ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepository();
-    private List<Product> products = productRepository.getAllProducts();
 
 
     public List<Product> getProducts(){
-        return this.products;
+        return productRepository.getAllProducts();
     }
 
     public List<Product> searchByTag(String keywords){
@@ -38,6 +37,8 @@ public class ProductService {
 
         List<Product> results = new ArrayList<>();
 
+        List<Product> products = this.getProducts();
+
         for(Product p : products){
             for(Product.Tag tag : tags){
                 if(p.getTags().contains(tag)){
@@ -55,6 +56,8 @@ public class ProductService {
         List<CartItem> items = shoppingCartRepository.listCartItems();
 
         if(items.size() != 0){
+
+            List<Product> products = this.getProducts();
 
             for(Product p : products){
                 for(CartItem ci : items){
