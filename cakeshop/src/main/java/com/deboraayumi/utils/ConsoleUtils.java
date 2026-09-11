@@ -1,4 +1,4 @@
-package com.utils;
+package com.deboraayumi.utils;
 
 public class ConsoleUtils {
     
