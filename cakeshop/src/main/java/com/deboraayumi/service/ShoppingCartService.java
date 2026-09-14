@@ -11,27 +11,44 @@ import com.deboraayumi.repository.ProductRepository;
 import com.deboraayumi.repository.ShoppingCartRepository;
 
 public class ShoppingCartService {
-
+    
     private ProductRepository productRepository = new ProductRepository();
     private ShoppingCart cart = new ShoppingCart();
     private ShoppingCartRepository cartRepository = new ShoppingCartRepository();
+    
+    
+    public List<CartItem> getCartItems(){
+        return cartRepository.listCartItems();
+    }
 
-    private List<Product> products = productRepository.getAllProducts();
+    public void setCartItems(List<CartItem> newList){
+        cart.setCartItems(newList);
+    }
 
+    public double getTotalValue(){
+        return cart.calcTotalValue();
+    }
+
+    public void resetCart(){
+        cartRepository.clean();
+
+    }
 
     public void save(){
         cartRepository.saveCart(cart);
     }
-
-
+    
+    
     public void addItem(CartItem c){
-
+        
         cart.addCartItem(c);
         save();
     }
 
 
     public void selectProduct(int selectedID, int quantity){
+
+        List<Product> products = productRepository.getAllProducts();
 
         for(Product p : products){
             if(selectedID == p.getId()){
@@ -51,17 +68,25 @@ public class ShoppingCartService {
 
     }
 
-    public List<CartItem> getCartItems(){
-        return cartRepository.listCartItems();
-    }
+    public void editCartIem(int chosenId, int newQuantity){
+        List<CartItem> cartItems = getCartItems();
 
-    public double getTotalValue(){
-        return cart.calcTotalValue();
-    }
+        for(CartItem ci : cartItems){
+            Product p = ci.getItem();
 
-    public void resetCart(){
-        cartRepository.clean();
+            if(p.getId() == chosenId){
+                if(newQuantity > p.getStock() || newQuantity <= 0){
+                    throw new InvalidItemQuantityException("The quantity can not exceed maximum or fall below the minimum stock quantity");
+                }
 
+                ci.setQuantity(newQuantity);
+            }
+        }
+
+        setCartItems(cartItems);
+        save();
+
+        return;
     }
 
     
