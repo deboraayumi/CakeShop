@@ -2,11 +2,18 @@ package com.deboraayumi.ui;
 
 import java.util.Scanner;
 
+import com.deboraayumi.service.ShoppingCartService;
+import com.deboraayumi.utils.InputValidatorUtils;
+
 
 public class MenuUI {
 
     Scanner scanner = new Scanner(System.in);
+
+    ShoppingCartService shoppingCartService = new ShoppingCartService();
+    InputValidatorUtils inputValidator = new InputValidatorUtils();
     ProductsListUI productsListUI = new ProductsListUI();
+    ShoppingCartUI shoppingCartUI = new ShoppingCartUI();
 
     public void printLogo(){
         System.out.printf("%60s \n", "=".repeat(70));
@@ -48,43 +55,43 @@ public class MenuUI {
 
             System.out.print("Choose a page to go: ");
 
-            
-            if(scanner.hasNextInt()){
-                int pageSelection = scanner.nextInt();
-                
-                switch (pageSelection){
-                    case 1:
-                        productsListUI.productsListPage();
-                        break;
-                    
-                    case 2:
-                        System.out.println("search");
-                        break;
-                    
-                    case 3:
-                        System.out.println("cart");
-                        break;
-                    
-                    case 4:
-                        System.out.println("check");
-                        break;
-                    
-                    case 0:
-                        System.exit(0);
-                        break;
+            int pageSelection = -1;
 
-                    default:
-                        System.out.println("Invalid value. Please, enter a number between 1 and 5.");
-                        break;
-                }
-                
-                
-            }else{
-
-                System.out.println("Invalid value. Please, enter a number.");
-                scanner.nextLine();
-                continue;
+            while(pageSelection < 0){
+                pageSelection = inputValidator.isInputAnInt();
             }
+
+            
+            
+            switch (pageSelection){
+                case 1:
+                    productsListUI.productsListPage();
+                    break;
+                
+                case 2:
+                    System.out.println("search");
+                    break;
+                
+                case 3:
+                    shoppingCartUI.listCartItems();
+                    break;
+                
+                case 4:
+                    System.out.println("check");
+                    break;
+                
+                case 0:
+                    shoppingCartService.resetCart();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid value. Please, enter a number between 1 and 5.");
+                    break;
+            }
+            
+                
+            
 
         }
     }
