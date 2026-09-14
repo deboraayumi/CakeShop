@@ -4,12 +4,14 @@ public class CartItem {
 
     private Product item;
     private int quantity;
+    private double subTotal;
 
     public CartItem(){}
 
     public CartItem(Product p, int quantity){
         this.item = p;
         this.quantity = quantity;
+        this.subTotal = p.getPrice() * quantity;
     }
 
     public Product getItem() {
@@ -21,6 +23,10 @@ public class CartItem {
     }
 
     public double getSubTotal(){
-        return this.item.getPrice() * quantity;
+        return this.subTotal;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

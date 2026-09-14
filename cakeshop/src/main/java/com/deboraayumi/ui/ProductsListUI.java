@@ -10,13 +10,16 @@ import com.deboraayumi.model.Product;
 import com.deboraayumi.service.ProductService;
 import com.deboraayumi.service.ShoppingCartService;
 import com.deboraayumi.utils.ConsoleUtils;
+import com.deboraayumi.utils.InputValidatorUtils;
 
 public class ProductsListUI {
     
     Scanner scanner = new Scanner(System.in);
+    int totalWidth = 55;
 
     ShoppingCartService shoppingCartService = new ShoppingCartService();
     ProductService productService = new ProductService();
+    InputValidatorUtils inputValidator = new InputValidatorUtils();
 
     public List<Product> getProductsToList(){
         try{
@@ -30,7 +33,6 @@ public class ProductsListUI {
 
     public void listProducts(){
 
-        int totalWidth = 55;
         List<Product> productsToList = getProductsToList();
 
         System.out.println("_".repeat(totalWidth));
@@ -49,12 +51,17 @@ public class ProductsListUI {
 
     public void productsListPage(){
         boolean itemAdded = false;
-        int choice = 0;
-        int quantity = 0;
         List<Product> productsToList = getProductsToList();
-
+        
         while(true){
+            int chosenId = -1;
+            int quantity = -1;
+
             ConsoleUtils.clearScreen();
+
+            System.out.println("+++ Product List Page +++");
+            System.out.println("-".repeat(totalWidth));
+
             if(itemAdded){
                 System.out.println("Item successfully added!");
                 itemAdded = false;
@@ -65,22 +72,19 @@ public class ProductsListUI {
             System.out.println("(press 0 to exit)");
 
             while(true){
+                chosenId = -1;
                 System.out.printf(("Add to cart the product with ID: "));
                 
-                if(!scanner.hasNextInt()){
-                    System.out.println("Invalid value. Please enter an ID that exist in the list.");
-                    scanner.next();
-                    continue;
+                while(chosenId < 0){
+                    chosenId = inputValidator.isInputAnInt();
                 }
 
-                choice = scanner.nextInt();
-
-                if(choice == 0){
+                if(chosenId == 0){
                     ConsoleUtils.clearScreen();
                     return;
                 }
 
-                if(choice < 0 || choice > productsToList.size()){
+                if(chosenId < 0 || chosenId > productsToList.size()){
                     System.out.println("Invalid ID. Please enter an ID that exist in the list");
                     
                     continue;
@@ -92,25 +96,20 @@ public class ProductsListUI {
             System.out.println("How much of that product? ");
 
             while(true){
-                if(!scanner.hasNextInt()){
-                    scanner.next();
-                    System.out.println("Invalid value. Please enter an integer number.");
+                quantity = -1;
 
-                    continue;
+                while (quantity < 0) {
+                    quantity = inputValidator.isInputAnInt();
                 }
                 
-                quantity = scanner.nextInt();
-
                 try{
-                    shoppingCartService.selectProduct(choice, quantity);
+                    shoppingCartService.selectProduct(chosenId, quantity);
                 } catch(InvalidItemQuantityException e){
-                    quantity = 0;
                     e.getMessage();
                     System.out.println("Please enter an number between 1 and the stock in the display.");
 
                     continue;
                 }
-                System.out.println("hello?");
                 itemAdded = true;
 
                 break;
