@@ -15,6 +15,10 @@ public class ShoppingCart {
         return new ArrayList<>(this.items);
     }
 
+    public void setCartItems(List<CartItem> newList){
+        this.items = newList;
+    }
+
     public void addCartItem(CartItem c){
         this.items.add(c);
     }
