@@ -26,7 +26,13 @@ public class ShoppingCartService {
     }
 
     public double getTotalValue(){
+        setCartItems(getCartItems());
         return cart.calcTotalValue();
+    }
+
+    public int getTotalQuantity(){
+        setCartItems(getCartItems());
+        return cart.calcTotalQuantity();
     }
 
     public void resetCart(){
