@@ -15,7 +15,7 @@ import com.deboraayumi.utils.InputValidatorUtils;
 public class ProductsListUI {
     
     Scanner scanner = new Scanner(System.in);
-    int totalWidth = 55;
+    int totalWidth = 61;
 
     ShoppingCartService shoppingCartService = new ShoppingCartService();
     ProductService productService = new ProductService();
@@ -36,10 +36,10 @@ public class ProductsListUI {
         List<Product> productsToList = getProductsToList();
 
         System.out.println("_".repeat(totalWidth));
-        System.out.printf("| %-2s | %-30s | %-5s | %-5s |\n", "ID", "Name", "Price", "Stock");
+        System.out.printf("| %-2s | %-30s | %-9s | %-7s |\n", "ID", "Name", "Price", "Stock");
 
         for(Product p : productsToList){
-            System.out.printf("| %-2d | %-30s | %-5.2f | %-5d |\n",
+            System.out.printf("| %-2d | %-30s | $ %-7.2f | %-7d |\n",
              p.getId(), p.getName(), p.getPrice(), p.getStock());
         }
 
