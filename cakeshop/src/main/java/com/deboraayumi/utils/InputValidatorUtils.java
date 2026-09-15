@@ -13,12 +13,14 @@ public class InputValidatorUtils {
             if(!scanner.hasNextInt()){
                 System.out.println("Invalid value. Please insert a positive number.");
                 scanner.next();
+                continue;
             }
 
             number = scanner.nextInt();
 
-            if(number<0){
+            if(number<=0){
                 System.out.println("Invalid value. Please insert a positive number.");
+                continue;
             }
 
             break;
@@ -33,9 +35,17 @@ public class InputValidatorUtils {
             if(!scanner.hasNextInt()){
                 System.out.println("Invalid value. Please insert a positive number.");
                 scanner.next();
+
+                continue;
             }
 
             number = scanner.nextInt();
+
+            if(number<0){
+               System.out.println("Invalid value. Please insert a positive number.");
+                continue;
+            }
+
             break;
         }
         return number;
