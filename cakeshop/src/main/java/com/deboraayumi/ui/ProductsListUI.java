@@ -54,8 +54,8 @@ public class ProductsListUI {
         List<Product> productsToList = getProductsToList();
         
         while(true){
-            int chosenId = -1;
-            int quantity = -1;
+            int chosenId = 0;
+            int quantity = 0;
 
             ConsoleUtils.clearScreen();
 
@@ -72,12 +72,9 @@ public class ProductsListUI {
             System.out.println("(press 0 to exit)");
 
             while(true){
-                chosenId = -1;
                 System.out.printf(("Add to cart the product with ID: "));
                 
-                while(chosenId < 0){
-                    chosenId = inputValidator.isInputAnInt();
-                }
+                chosenId = inputValidator.getNonNegativeInt();
 
                 if(chosenId == 0){
                     ConsoleUtils.clearScreen();
@@ -96,11 +93,9 @@ public class ProductsListUI {
             System.out.println("How much of that product? ");
 
             while(true){
-                quantity = -1;
-
-                while (quantity < 0) {
-                    quantity = inputValidator.isInputAnInt();
-                }
+                
+                quantity = inputValidator.getPositiveInt();
+                
                 
                 try{
                     shoppingCartService.selectProduct(chosenId, quantity);

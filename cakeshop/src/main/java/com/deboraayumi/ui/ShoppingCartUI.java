@@ -60,8 +60,8 @@ public class ShoppingCartUI {
     public void editCartItem(){
 
         List<CartItem> items = shoppingCartService.getCartItems();
-        int chosenId = -1;
-        int quantity = -1;
+        int chosenId;
+        int quantity;
 
         while (true) {
             
@@ -74,9 +74,8 @@ public class ShoppingCartUI {
 
             while (true) {
                 
-                while(chosenId <= 0){
-                    chosenId = inputValidator.isInputAnInt();
-                }
+                chosenId = inputValidator.getPositiveInt();
+                
 
                 boolean foundId = false;
 
@@ -98,9 +97,8 @@ public class ShoppingCartUI {
                     continue;
                 }
 
-                while (quantity <= 0) {
-                    quantity = inputValidator.isInputAnInt();
-                }
+                quantity = inputValidator.getPositiveInt();
+                
 
                 try{
                     // quantity <= 0 repete aqui tbm
@@ -111,7 +109,8 @@ public class ShoppingCartUI {
                 }                
             }
 
-
+            // testa o app pra ver oq falta fazer
+            // inputvalidator incompleto
         }
 
     }
@@ -133,7 +132,7 @@ public class ShoppingCartUI {
             System.out.println("2 - Delete Item");
 
             while (selection < 0) {
-                selection = inputValidator.isInputAnInt();
+                selection = inputValidator.getNonNegativeInt();
             }
 
             switch (selection){
