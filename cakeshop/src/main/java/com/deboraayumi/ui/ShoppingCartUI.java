@@ -19,7 +19,7 @@ public class ShoppingCartUI {
     Scanner scanner = new Scanner(System.in);
     InputValidatorUtils inputValidator = new InputValidatorUtils();
 
-    int totalWidth = 69;
+    int totalWidth = 72;
 
     public List<CartItem> getCarItemsToList(){
         try{
@@ -45,23 +45,24 @@ public class ShoppingCartUI {
 
 
         System.out.println("_".repeat(totalWidth));
-        System.out.printf("| %-2s | %-30s | %-5s | %-8s | %-9s |\n", "ID", "Name", "Price", "Quantity", "Sub Total");
+        System.out.printf("| %-2s | %-30s | %-7s | %-7s | %-8s |\n", "ID", "Name", "Price", "Quantity", "Sub Total");
 
         for(CartItem ci : cartItemsToList){
-            System.out.printf("| %-2d | %-30s | %-5.2f | %8d | %9.2f |\n",
+            System.out.printf("| %-2d | %-30s | $ %5.2f | %8d | $ %7.2f |\n",
             ci.getItem().getId(), ci.getItem().getName(), ci.getItem().getPrice(), ci.getQuantity(), ci.getSubTotal());
         }
-
-        System.out.printf("Total: %.2f", shoppingCartService.getTotalValue());
-
         System.out.println("_".repeat(totalWidth));
+
+        System.out.printf("Total Quantity: %d\n", shoppingCartService.getTotalQuantity());
+        System.out.printf("Total Value: $ %.2f\n", shoppingCartService.getTotalValue());
+
     }
 
     public void editCartItem(){
 
         List<CartItem> items = shoppingCartService.getCartItems();
-        int chosenId = -1;
-        int quantity = -1;
+        int chosenId;
+        int quantity;
 
         while (true) {
             
@@ -74,9 +75,8 @@ public class ShoppingCartUI {
 
             while (true) {
                 
-                while(chosenId <= 0){
-                    chosenId = inputValidator.isInputAnInt();
-                }
+                chosenId = inputValidator.getPositiveInt();
+                
 
                 boolean foundId = false;
 
@@ -98,9 +98,8 @@ public class ShoppingCartUI {
                     continue;
                 }
 
-                while (quantity <= 0) {
-                    quantity = inputValidator.isInputAnInt();
-                }
+                quantity = inputValidator.getPositiveInt();
+                
 
                 try{
                     // quantity <= 0 repete aqui tbm
@@ -111,7 +110,8 @@ public class ShoppingCartUI {
                 }                
             }
 
-
+            // testa o app pra ver oq falta fazer
+            // inputvalidator incompleto
         }
 
     }
@@ -133,7 +133,7 @@ public class ShoppingCartUI {
             System.out.println("2 - Delete Item");
 
             while (selection < 0) {
-                selection = inputValidator.isInputAnInt();
+                selection = inputValidator.getNonNegativeInt();
             }
 
             switch (selection){

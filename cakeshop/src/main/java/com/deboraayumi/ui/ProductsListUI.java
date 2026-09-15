@@ -15,7 +15,7 @@ import com.deboraayumi.utils.InputValidatorUtils;
 public class ProductsListUI {
     
     Scanner scanner = new Scanner(System.in);
-    int totalWidth = 55;
+    int totalWidth = 61;
 
     ShoppingCartService shoppingCartService = new ShoppingCartService();
     ProductService productService = new ProductService();
@@ -36,10 +36,10 @@ public class ProductsListUI {
         List<Product> productsToList = getProductsToList();
 
         System.out.println("_".repeat(totalWidth));
-        System.out.printf("| %-2s | %-30s | %-5s | %-5s |\n", "ID", "Name", "Price", "Stock");
+        System.out.printf("| %-2s | %-30s | %-9s | %-7s |\n", "ID", "Name", "Price", "Stock");
 
         for(Product p : productsToList){
-            System.out.printf("| %-2d | %-30s | %-5.2f | %-5d |\n",
+            System.out.printf("| %-2d | %-30s | $ %-7.2f | %-7d |\n",
              p.getId(), p.getName(), p.getPrice(), p.getStock());
         }
 
@@ -54,8 +54,8 @@ public class ProductsListUI {
         List<Product> productsToList = getProductsToList();
         
         while(true){
-            int chosenId = -1;
-            int quantity = -1;
+            int chosenId = 0;
+            int quantity = 0;
 
             ConsoleUtils.clearScreen();
 
@@ -72,12 +72,9 @@ public class ProductsListUI {
             System.out.println("(press 0 to exit)");
 
             while(true){
-                chosenId = -1;
                 System.out.printf(("Add to cart the product with ID: "));
                 
-                while(chosenId < 0){
-                    chosenId = inputValidator.isInputAnInt();
-                }
+                chosenId = inputValidator.getNonNegativeInt();
 
                 if(chosenId == 0){
                     ConsoleUtils.clearScreen();
@@ -96,11 +93,9 @@ public class ProductsListUI {
             System.out.println("How much of that product? ");
 
             while(true){
-                quantity = -1;
-
-                while (quantity < 0) {
-                    quantity = inputValidator.isInputAnInt();
-                }
+                
+                quantity = inputValidator.getPositiveInt();
+                
                 
                 try{
                     shoppingCartService.selectProduct(chosenId, quantity);
