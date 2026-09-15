@@ -35,6 +35,7 @@ public class InputValidatorUtils {
                 scanner.next();
             }
 
+            number = scanner.nextInt();
             break;
         }
         return number;
