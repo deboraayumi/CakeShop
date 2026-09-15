@@ -57,11 +57,7 @@ public class MenuUI {
 
             int pageSelection = -1;
 
-            while(pageSelection < 0){
-                pageSelection = inputValidator.isInputAnInt();
-            }
-
-            
+            pageSelection = inputValidator.getNonNegativeInt();
             
             switch (pageSelection){
                 case 1:
