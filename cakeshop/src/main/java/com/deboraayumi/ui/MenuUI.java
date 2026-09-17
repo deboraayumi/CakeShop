@@ -69,7 +69,7 @@ public class MenuUI {
                     break;
                 
                 case 3:
-                    shoppingCartUI.listCartItems();
+                    shoppingCartUI.shoppingCartPage();
                     break;
                 
                 case 4:
