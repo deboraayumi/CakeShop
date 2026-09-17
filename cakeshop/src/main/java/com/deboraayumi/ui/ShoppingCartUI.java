@@ -33,8 +33,6 @@ public class ShoppingCartUI {
 
 
     public void listCartItems(){
-
-        ConsoleUtils.clearScreen();
         
         List<CartItem> cartItemsToList = getCarItemsToList();
 
@@ -58,27 +56,26 @@ public class ShoppingCartUI {
 
     }
 
-    public void editCartItem(){
+    public boolean editCartItem(){
 
         List<CartItem> items = shoppingCartService.getCartItems();
-        int chosenId;
+        int chosenId = 0;
         int quantity;
+        
+        System.out.println("+++ Shopping Cart -> Item Edit Page +++");
+        System.out.println("-".repeat(totalWidth));
 
         while (true) {
             
-            System.out.println("+++ Shopping Cart -> Item Edit Page +++");
-            System.out.println("-".repeat(totalWidth));
-
             listCartItems();
 
-            System.out.printf("Select the ID of the Item that you want to edit the quantity: ");
+            boolean foundId = false;
 
-            while (true) {
-                
+            while(foundId == false){
+
+                System.out.printf("Select the ID of the Item that you want to edit the quantity: ");
+       
                 chosenId = inputValidator.getPositiveInt();
-                
-
-                boolean foundId = false;
 
                 for(CartItem ci : items){
                     Product p = ci.getItem();
@@ -95,46 +92,66 @@ public class ShoppingCartUI {
 
                 if(foundId == false){
                     System.out.println("This ID don't exist in your list. Please enter an ID that you have in your list.");
-                    continue;
+                    
                 }
-
-                quantity = inputValidator.getPositiveInt();
-                
-
-                try{
-                    // quantity <= 0 repete aqui tbm
-                    shoppingCartService.editCartIem(chosenId, quantity);
-                } catch (InvalidItemQuantityException e){
-                    e.getMessage();
-                    continue;
-                }                
             }
 
-            // testa o app pra ver oq falta fazer
-            // inputvalidator incompleto
+            quantity = inputValidator.getPositiveInt();
+            
+
+            try{
+                // quantity <= 0 repete aqui tbm
+                shoppingCartService.editCartIem(chosenId, quantity);
+            } catch (InvalidItemQuantityException e){
+                e.getMessage();
+                continue;
+            }                
+        
+            return true;
         }
 
     }
 
 
-    public void shoppingCartMenu(){
+    public void shoppingCartPage(){
 
-        int selection = -1;
+        int selection;
+        boolean editSuccess = false;
+        boolean deleteSuccess = false;
+        boolean invalidSelection = false;
         
         while(true){
+
+            ConsoleUtils.clearScreen();
             
             System.out.println("+++ Shopping Cart Page +++");
             System.out.println("-".repeat(totalWidth));
+
+            if(editSuccess){
+                System.out.println("Item successfully edited!");
+                editSuccess = false;
+            }
+
+            if(deleteSuccess){
+                System.out.println("Item successfully deleted!");
+                deleteSuccess = false;
+            }
+
+            if(invalidSelection){
+                System.out.println("Invalid value. Please insert an number between 1 and 0");
+                invalidSelection = false;
+            }
+
             
+            System.out.println("Your Cart: ");
             listCartItems();
         
-            System.out.println("(press 0 to exit)");
             System.out.println("1 - Edit Item Quantity");
             System.out.println("2 - Delete Item");
-
-            while (selection < 0) {
-                selection = inputValidator.getNonNegativeInt();
-            }
+            System.out.println("0 - Return to the Home Menu");
+            
+            selection = inputValidator.getNonNegativeInt();
+            
 
             switch (selection){
 
@@ -143,12 +160,14 @@ public class ShoppingCartUI {
                     return;
 
                 case 1: 
-                    editCartItem();
+                    ConsoleUtils.clearScreen();
+                    editSuccess = editCartItem();
                     break;
+
                 case 2:
 
                 default: 
-                    System.out.println("Invalid value. Please, enter a number between 1 and 5.");
+                    invalidSelection = true;
                     break;
 
             }
