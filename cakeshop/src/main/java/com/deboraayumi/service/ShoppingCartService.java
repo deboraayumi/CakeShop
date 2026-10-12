@@ -81,18 +81,37 @@ public class ShoppingCartService {
             Product p = ci.getItem();
 
             if(p.getId() == chosenId){
-                if(newQuantity > p.getStock() || newQuantity <= 0){
-                    throw new InvalidItemQuantityException("The quantity can not exceed maximum or fall below the minimum stock quantity");
+                if(newQuantity > p.getStock()){
+                    throw new InvalidItemQuantityException("The quantity can not exceed maximum stock quantity.");
                 }
-
                 ci.setQuantity(newQuantity);
+
+                setCartItems(cartItems);
+                save();
+        
+                return;
             }
         }
 
-        setCartItems(cartItems);
-        save();
+        throw new InvalidProductIdException("This ID doesn't exist in your list.");
 
-        return;
+    }
+
+    public void deleteCartItem(int chosenId){
+        List<CartItem> cartItems = getCartItems();
+
+        for(CartItem ci : cartItems){
+            Product p = ci.getItem();
+
+            if(p.getId() == chosenId){
+                cartItems.remove(ci);
+                setCartItems(cartItems);
+                save(); 
+                return;
+            }
+        }
+
+        throw new InvalidProductIdException("This ID doesn't exist in your list.");
     }
 
     
