@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.deboraayumi.exception.InvalidItemQuantityException;
 import com.deboraayumi.exception.ProductLoadException;
+import com.deboraayumi.exception.InvalidProductIdException;
 import com.deboraayumi.model.Product;
 import com.deboraayumi.service.ProductService;
 import com.deboraayumi.service.ShoppingCartService;
@@ -26,7 +27,7 @@ public class ProductsListUI {
             return productService.getProducts();
             
         } catch (ProductLoadException e){
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -41,47 +42,32 @@ public class ProductsListUI {
         for(Product p : productsToList){
             System.out.printf("| %-2d | %-30s | $ %-7.2f | %-7d |\n",
              p.getId(), p.getName(), p.getPrice(), p.getStock());
-        }
-
-
-        System.out.println("_".repeat(totalWidth));
-
-    }
-
-
-    public void productsListPage(){
-        boolean itemAdded = false;
-        List<Product> productsToList = getProductsToList();
-        
-        while(true){
-            int chosenId = 0;
-            int quantity = 0;
-
-            ConsoleUtils.clearScreen();
-
-            System.out.println("+++ Product List Page +++");
-            System.out.println("-".repeat(totalWidth));
-
-            if(itemAdded){
-                System.out.println("Item successfully added!");
-                itemAdded = false;
             }
+            
+            
+            System.out.println("_".repeat(totalWidth));
+            
+    }
+    
+    public boolean addProduct(){
+        List<Product> productsToList = getProductsToList();
 
-            listProducts();
+        int chosenId = 0;
+        int quantity = 0;
 
-            System.out.println("(press 0 to exit)");
+        System.out.println("+++ Product List -> Item Add Page +++");
+        System.out.println("-".repeat(totalWidth));
 
-            while(true){
+        listProducts();
+
+
+        while(true){
                 System.out.printf(("Add to cart the product with ID: "));
                 
-                chosenId = inputValidator.getNonNegativeInt();
+                chosenId = inputValidator.getPositiveInt();
 
-                if(chosenId == 0){
-                    ConsoleUtils.clearScreen();
-                    return;
-                }
 
-                if(chosenId < 0 || chosenId > productsToList.size()){
+                if(chosenId > productsToList.size()){
                     System.out.println("Invalid ID. Please enter an ID that exist in the list");
                     
                     continue;
@@ -100,16 +86,66 @@ public class ProductsListUI {
                 try{
                     shoppingCartService.selectProduct(chosenId, quantity);
                 } catch(InvalidItemQuantityException e){
-                    e.getMessage();
+                    System.out.println(e.getMessage());
                     System.out.println("Please enter an number between 1 and the stock in the display.");
 
                     continue;
+                } catch(InvalidProductIdException e){
+                    System.out.println(e.getMessage());
                 }
-                itemAdded = true;
+                return true;
 
-                break;
             }
             
+
+    }
+
+    public void productsListPage(){
+        boolean itemAdded = false;
+        boolean invalidSelection = false;
+        int selection;
+        
+        while(true){
+
+            ConsoleUtils.clearScreen();
+
+            System.out.println("+++ Product List Page +++");
+            System.out.println("-".repeat(totalWidth));
+
+            if(itemAdded){
+                System.out.println("Item successfully added!");
+                itemAdded = false;
+            }
+
+            if(invalidSelection){
+                System.out.println("Invalid value. Please insert an number between 1 and 0");
+                invalidSelection = false;
+            }
+
+            listProducts();
+
+            System.out.println("1 - Add Item");
+            System.out.println("0 - Return to the Home Menu");
+            System.out.printf("Choose a page to go: ");
+
+            
+            selection = scanner.nextInt();
+            
+            switch (selection) {
+            case 1:
+                ConsoleUtils.clearScreen();
+                itemAdded = addProduct();
+                break;
+
+            case 0:
+                ConsoleUtils.clearScreen();
+                return;
+                
+            default:
+                invalidSelection = true;
+                break;
+            }
+                            
         }
     }
 }
