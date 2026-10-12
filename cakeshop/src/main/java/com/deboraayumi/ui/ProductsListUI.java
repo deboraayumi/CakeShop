@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.deboraayumi.exception.InvalidItemQuantityException;
 import com.deboraayumi.exception.ProductLoadException;
+import com.deboraayumi.exception.InvalidProductIdException;
 import com.deboraayumi.model.Product;
 import com.deboraayumi.service.ProductService;
 import com.deboraayumi.service.ShoppingCartService;
@@ -26,7 +27,7 @@ public class ProductsListUI {
             return productService.getProducts();
             
         } catch (ProductLoadException e){
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -84,14 +85,14 @@ public class ProductsListUI {
                 
                 try{
                     shoppingCartService.selectProduct(chosenId, quantity);
-                    System.out.println("cheguei");
                 } catch(InvalidItemQuantityException e){
-                    e.getMessage();
+                    System.out.println(e.getMessage());
                     System.out.println("Please enter an number between 1 and the stock in the display.");
 
                     continue;
+                } catch(InvalidProductIdException e){
+                    System.out.println(e.getMessage());
                 }
-                    System.out.println("cheguei2");
                 return true;
 
             }

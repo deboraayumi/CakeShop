@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.deboraayumi.exception.CartLoadException;
 import com.deboraayumi.exception.InvalidItemQuantityException;
+import com.deboraayumi.exception.InvalidProductIdException;
 import com.deboraayumi.model.CartItem;
 import com.deboraayumi.model.Product;
 import com.deboraayumi.service.ShoppingCartService;
@@ -26,7 +27,7 @@ public class ShoppingCartUI {
             return shoppingCartService.getCartItems();
             
         } catch (CartLoadException e){
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -41,7 +42,8 @@ public class ShoppingCartUI {
             return;
         }
 
-
+        
+        System.out.println("Your Cart: ");
         System.out.println("_".repeat(totalWidth));
         System.out.printf("| %-2s | %-30s | %-7s | %-7s | %-8s |\n", "ID", "Name", "Price", "Quantity", "Sub Total");
 
@@ -70,8 +72,9 @@ public class ShoppingCartUI {
             listCartItems();
 
             boolean foundId = false;
+            int maxStock = 0;
 
-            while(foundId == false){
+            while(!foundId){
 
                 System.out.printf("Select the ID of the Item that you want to edit the quantity: ");
        
@@ -81,37 +84,67 @@ public class ShoppingCartUI {
                     Product p = ci.getItem();
 
                     if(p.getId() == chosenId){
+                        maxStock = p.getStock();
                         foundId = true;
-
-                        System.out.println("How much of it do you want?");
-                        System.out.printf("(Max stock = %d )\n", p.getStock());
-
                         break;
                     }
                 }
 
-                if(foundId == false){
+                if(!foundId){
                     System.out.println("This ID don't exist in your list. Please enter an ID that you have in your list.");
-                    
                 }
             }
 
-            quantity = inputValidator.getPositiveInt();
-            
+            while(true){
+                System.out.println("How much of it do you want?");
+                System.out.printf("(Max stock = %d )\n", maxStock);
 
-            try{
-                // quantity <= 0 repete aqui tbm
-                shoppingCartService.editCartIem(chosenId, quantity);
-            } catch (InvalidItemQuantityException e){
-                e.getMessage();
-                continue;
-            }                
+                quantity = inputValidator.getPositiveInt();
+                
+
+                try{
+                    // quantity <= 0 repete aqui tbm
+                    shoppingCartService.editCartIem(chosenId, quantity);
+                } catch (InvalidItemQuantityException e){
+                    System.out.println(e.getMessage());
+                    continue;
+                }    
+                
+                break;
         
+            }
             return true;
         }
 
     }
 
+    public boolean deleteCartItem(){
+        int chosenId;
+
+        System.out.println("+++ Shopping Cart -> Item Delete Page +++");
+        System.out.println("-".repeat(totalWidth));
+
+
+        listCartItems();
+
+        while(true){
+            System.out.printf("Select the ID of the item that you want to delete: ");
+
+            chosenId = inputValidator.getPositiveInt();
+
+            try{
+                shoppingCartService.deleteCartItem(chosenId);
+            }catch (InvalidProductIdException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
+
+            break;
+        }
+
+        return true;
+
+    }
 
     public void shoppingCartPage(){
 
@@ -143,7 +176,6 @@ public class ShoppingCartUI {
             }
 
             
-            System.out.println("Your Cart: ");
             listCartItems();
         
             System.out.println("1 - Edit Item Quantity");
@@ -165,6 +197,9 @@ public class ShoppingCartUI {
                     break;
 
                 case 2:
+                    ConsoleUtils.clearScreen();
+                    deleteSuccess = deleteCartItem();
+                    break;
 
                 default: 
                     invalidSelection = true;
